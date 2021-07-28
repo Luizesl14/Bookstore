@@ -1,15 +1,23 @@
 package com.bs.bookstore.domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Categoria {
+@Entity
+public class Categoria  implements Serializable {
 
+    private  static  final  long  serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Integer id;
     private  String  name;
     private  String  descricao;
 
+    @OneToMany(mappedBy = "categoria")
     private List<Book> books = new ArrayList<>();
 
     public Categoria() {
@@ -23,6 +31,8 @@ public class Categoria {
         this.descricao = descricao;
     }
 
+    @Id
+    @GeneratedValue
     public Integer getId() {
         return id;
     }
@@ -47,9 +57,6 @@ public class Categoria {
         this.descricao = descricao;
     }
 
-    public List<Book> getBooks() {
-        return books;
-    }
 
     public void setBooks(List<Book> books) {
         this.books = books;
@@ -67,4 +74,5 @@ public class Categoria {
     public int hashCode() {
         return Objects.hash(getId());
     }
+
 }

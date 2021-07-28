@@ -1,14 +1,22 @@
 package com.bs.bookstore.domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Book {
+@Entity
+public class Book implements Serializable {
+     private  static  final long serialVersionUID = 1L;
 
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Integer id;
      private String titulo;
      private String nome_autor;
      private String text;
 
+     @ManyToOne
+     @JoinColumn(name = "categoria_id")
      private  Categoria categoria;
 
      public Book() {
